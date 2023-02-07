@@ -4,22 +4,29 @@ EX=0
 read -n 1 -s -r -p "Please ensure that you have all of the dependencies for Alacritty, feh and leftwm installed, along with Git, Rustup, GCC, make and cmake. If you do, press any key to continue installation. If you don't, press Ctrl+C to halt the program"
 
 
-if git help; then
-    echo "Git is installed!"
-else
+if ! [ -x "$(command -v git)" ]; then
     echo "Git is not installed! Please install it!"
     EX=1
 fi
-if cargo help; then
+if ! [ -x "$(command -v cc)" ]; then
+    echo "GCC is not installed! Please install it!"
+    EX=1
+fi
+if ! [ -x "$(command -v make)" ]; then
+    echo "make is not installed! Please install it!"
+    EX=1
+fi
+if [ -x "$(command -v cargo)" ]; then
     echo "Cargo is set up!"
 else
     echo "Cargo is either not installed or not configured!"
     echo "Attempting rustup"
-    if rustup default stable; then
+    if [ -x "$(command -v rustup)" ]; then
+        rustup default stable
         rustup override set stable
         rustup update stable
         echo "Rustup worked! Retrying cargo"
-        if cargo help; then
+        if [ -x "$(command -v cargo)" ]; then
             echo "Cargo works!"
         else
             echo "Cargo is not installed, but rustup is! Something is very wrong!"
