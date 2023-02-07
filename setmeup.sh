@@ -1,7 +1,7 @@
 #!/bin/bash
 EX=0
 
-read -n 1 -s -r -p "Please ensure that you have all of the dependencies for Alacritty, feh and leftwm installed. If you do, press any key to continue installation. If you don't, press Ctrl+C to halt the program"
+read -n 1 -s -r -p "Please ensure that you have all of the dependencies for Alacritty, feh and leftwm installed, along with Git, Rustup, GCC, make and cmake. If you do, press any key to continue installation. If you don't, press Ctrl+C to halt the program"
 
 
 if git help; then
@@ -44,7 +44,8 @@ fi
 
 git clone https://github.com/leftwm/leftwm
 cd leftwm
-cargo build --profile optimized
+cargo build --profile optimized --no-default-features --features=lefthk
+# this will work even without systemd
 
 sudo rm /usr/bin/leftwm
 sudo rm /usr/bin/leftwm-worker
@@ -71,6 +72,8 @@ else
     tic -xe alacritty,alacritty-direct extra/alacritty.info
 fi
 
+sudo rm /usr/local/bin/alacritty
+sudo rm /usr/share/pixmaps/Alacritty.svg
 sudo ln -s "$(pwd)"/target/release/alacritty /usr/local/bin/alacritty
 sudo ln -s "$(pwd)"/extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
 sudo desktop-file-install extra/linux/Alacritty.desktop
@@ -84,6 +87,7 @@ git clone https://github.com/PonasKovas/rlaunch.git
 cd rlaunch
 cargo build --release
 
+sudo rm /usr/bin/rlaunch
 sudo ln -s "$(pwd)"/target/release/rlaunch /usr/bin/rlaunch
 
 cd ..
@@ -100,8 +104,11 @@ cd ..
 
 echo "Please install polybar using the package manager of your choice. The amount of dependencies is, at this point, simply too much to handle. Polybar is available for most distros."
 
-sudo mv ~/dotfiles/.config ~/.config
+sudo cp -r ~/dotfiles/.config/* ~/.config
 sudo ln -s ~/.config/leftwm/themes/ondrik ~/.config/leftwm/themes/current
+chmod +x ~/.config/leftwm/themes/current/up
+chmod +x ~/.config/leftwm/themes/current/down
+
 
 echo "Please also update your .xinitrc file"
 
