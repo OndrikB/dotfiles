@@ -98,16 +98,12 @@ sudo make install
 
 cd ..
 
-echo "Please install polybar using the package manager of your choice. The amount of dependencies is, at this point, simply too much to handle. Polybar is available for most distros. "
+echo "Please install polybar using the package manager of your choice. The amount of dependencies is, at this point, simply too much to handle. Polybar is available for most distros."
 
 sudo mv ~/dotfiles/.config ~/.config
 sudo ln -s ~/.config/leftwm/themes/ondrik ~/.config/leftwm/themes/current
 
-if sudo cp /etc/X11/xinit/xinitrc ~/.xinitrc; then
-    echo "Arch-based distro detected! Please comment certain lines before the leftwm exec"
-    echo "exec leftwm" >> ~/.xinitrc
-
-echo "Hopefully everything is properly set up now! Please make sure to also set your screen resolution, and here's a second reminder to install polybar"
+echo "Please also update your .xinitrc file"
 
 
 
