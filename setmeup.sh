@@ -49,6 +49,8 @@ else
     cd desktop_env
 fi
 
+# LeftWM, a Tiling Window Manager written in Rust
+
 git clone https://github.com/leftwm/leftwm
 cd leftwm
 cargo build --profile optimized --no-default-features --features=lefthk
@@ -68,6 +70,9 @@ sudo ln -s "$(pwd)"/target/optimized/leftwm-check /usr/bin/leftwm-check
 sudo ln -s "$(pwd)"/target/optimized/leftwm-command /usr/bin/leftwm-command
 
 cd ..
+
+
+# Alacritty, a terminal emulator written in Rust
 
 git clone https://github.com/alacritty/alacritty
 cd alacritty
@@ -90,6 +95,9 @@ echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc
 
 cd ..
 
+
+# rlaunch, a program launcher written in Rust (because dmenu wasn't fast enough lol)
+
 git clone https://github.com/PonasKovas/rlaunch.git
 cd rlaunch
 cargo build --release
@@ -99,15 +107,27 @@ sudo ln -s "$(pwd)"/target/release/rlaunch /usr/bin/rlaunch
 
 cd ..
 
-git clone https://github.com/derf/feh
+# feh (this is written in C!)
 
-# this is written in C!
+git clone https://github.com/derf/feh
 cd feh
 
 make
 sudo make install
 
 cd ..
+
+# rlock, so I can actually lock my screen - written in, you guessed it, Rust!
+
+git clone https://github.com/akermu/rlock
+cd rlock
+
+cargo build --release
+sudo chown root target/release/rlock
+sudo chmod u+s target/release/rlock
+sudo ln -s "$(pwd)"/target/release/rlock /usr/local/bin/rlock
+
+
 
 echo "Please install polybar using the package manager of your choice. The amount of dependencies is, at this point, simply too much to handle. Polybar is available for most distros."
 
