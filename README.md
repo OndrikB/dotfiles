@@ -6,5 +6,7 @@ Linux config files (currently lots of example configs, will customize at some po
  - leftwm
  - alacritty
  - rlaunch
+ - polybar
+ - feh
 
-for setup, get `cargo`, build everything and copy it to /usr/bin (TODO: automate), then pull this
+for setup, pull this, copy `setmeup.sh` into the home directory and run it
