@@ -133,8 +133,8 @@ echo "Please install polybar using the package manager of your choice. The amoun
 
 sudo cp -r ~/dotfiles/.config/* ~/.config
 sudo ln -s ~/.config/leftwm/themes/ondrik ~/.config/leftwm/themes/current
-chmod +x ~/.config/leftwm/themes/current/up
-chmod +x ~/.config/leftwm/themes/current/down
+sudo chmod +x ~/.config/leftwm/themes/current/up
+sudo chmod +x ~/.config/leftwm/themes/current/down
 
 
 echo "Please also update your .xinitrc file"
