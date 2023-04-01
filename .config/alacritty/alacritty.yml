@@ -201,8 +201,8 @@
 colors:
   # Default colors
   primary:
-    background: '#1d1f21'
-    #background: '#2c2311'
+    #background: '#1d1f21'
+    background: '#2c2311'
     foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
@@ -405,7 +405,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Beam
+    shape: Underline
 
     # Cursor blinking state
     #

@@ -6,12 +6,10 @@
 // |_|\____)_|   \___)____|_|_|_|   \____)___/|_| |_|_|  |_|\_|| (_)_|   \___/|_| |_|
 // A WindowManager for Adventurers                         (____/
 // For info about configuration please visit https://github.com/leftwm/leftwm/wiki
-
 #![enable(implicit_some)]
 (
     modkey: "Mod4",
     mousekey: "Mod4",
-    workspaces: [],
     tags: [
         "1",
         "2",
@@ -48,12 +46,8 @@
     window_rules: [],
     disable_current_tag_swap: false,
     disable_tile_drag: false,
-    disable_window_snap: true,
     focus_behaviour: Sloppy,
     focus_new_windows: true,
-    single_window_border: true,
-    sloppy_mouse_follows_focus: true,
-    auto_derive_workspaces: true,
     keybind: [
         (command: Execute, value: "rlaunch", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "alacritty", modifier: ["modkey", "Shift"], key: "Return"),
@@ -78,8 +72,8 @@
         (command: FocusWindowDown, value: "", modifier: ["modkey"], key: "Down"),
         (command: NextLayout, value: "", modifier: ["modkey", "Control"], key: "Up"),
         (command: PreviousLayout, value: "", modifier: ["modkey", "Control"], key: "Down"),
-        (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "Right"),
-        (command: FocusWorkspacePrevious, value: "", modifier: ["modkey"], key: "Left"),
+        (command: IncreaseMainWidth, value: "1", modifier: ["modkey"], key: "Right"),
+        (command: DecreaseMainWidth, value: "1", modifier: ["modkey"], key: "Left"),
         (command: GotoTag, value: "1", modifier: ["modkey"], key: "1"),
         (command: GotoTag, value: "2", modifier: ["modkey"], key: "2"),
         (command: GotoTag, value: "3", modifier: ["modkey"], key: "3"),
@@ -98,6 +92,7 @@
         (command: MoveToTag, value: "7", modifier: ["modkey", "Shift"], key: "7"),
         (command: MoveToTag, value: "8", modifier: ["modkey", "Shift"], key: "8"),
         (command: MoveToTag, value: "9", modifier: ["modkey", "Shift"], key: "9"),
+        (command: ToggleFullScreen, value: "", modifier: ["modkey", "Mod1"], key: "Return"),
     ],
-    state_path: None,
+    workspaces: [],
 )
