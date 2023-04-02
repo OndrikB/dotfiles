@@ -1,5 +1,7 @@
 #!/bin/bash
 EX=0
+ALACRITTY_INSTALL=0
+FEH_INSTALL=0
 
 read -n 1 -s -r -p "Please ensure that you have all of the dependencies for Alacritty, feh and leftwm installed, along with Git, Rustup, GCC, make and cmake. If you do, press any key to continue installation. If you don't, press Ctrl+C to halt the program"
 
@@ -74,27 +76,37 @@ cd ..
 
 # Alacritty, a terminal emulator written in Rust
 
-git clone https://github.com/alacritty/alacritty
-cd alacritty
-cargo build --release --no-default-features --features=x11
+echo "Do you wish to install Alacritty manually? (NOTE: should only be done if it isn't in your package manager!)"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) ALACRITTY_INSTALL=1; break;;
+        No ) break;;
+    esac
+done
 
-if infocmp alacritty; then
-    echo "Alacritty terminfo is installed!"
-else
-    tic -xe alacritty,alacritty-direct extra/alacritty.info
+if [$ALACRITTY_INSTALL -eq 1]; then
+    git clone https://github.com/alacritty/alacritty
+    cd alacritty
+    cargo build --release --no-default-features --features=x11
+
+    if infocmp alacritty; then
+        echo "Alacritty terminfo is installed!"
+    else
+        tic -xe alacritty,alacritty-direct extra/alacritty.info
+    fi
+
+    sudo rm /usr/local/bin/alacritty
+    sudo rm /usr/share/pixmaps/Alacritty.svg
+    sudo ln -s "$(pwd)"/target/release/alacritty /usr/local/bin/alacritty
+    sudo ln -s "$(pwd)"/extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+    sudo desktop-file-install extra/linux/Alacritty.desktop
+    sudo update-desktop-database
+
+    echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc
+
+    cd ..
+
 fi
-
-sudo rm /usr/local/bin/alacritty
-sudo rm /usr/share/pixmaps/Alacritty.svg
-sudo ln -s "$(pwd)"/target/release/alacritty /usr/local/bin/alacritty
-sudo ln -s "$(pwd)"/extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-sudo desktop-file-install extra/linux/Alacritty.desktop
-sudo update-desktop-database
-
-echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc
-
-cd ..
-
 
 # rlaunch, a program launcher written in Rust (because dmenu wasn't fast enough lol)
 
@@ -108,14 +120,24 @@ sudo ln -s "$(pwd)"/target/release/rlaunch /usr/bin/rlaunch
 cd ..
 
 # feh (this is written in C!)
+echo "Do you wish to install feh manually? (NOTE: should only be done if it isn't in your package manager!)"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) FEH_INSTALL=1; break;;
+        No ) break;;
+    esac
+done
 
-git clone https://github.com/derf/feh
-cd feh
+if [$FEH_INSTALL -eq 1]; then
 
-make
-sudo make install
+    git clone https://github.com/derf/feh
+    cd feh
 
-cd ..
+    make
+    sudo make install
+
+    cd ..
+fi
 
 # rlock, so I can actually lock my screen - written in, you guessed it, Rust!
 
