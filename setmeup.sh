@@ -58,18 +58,23 @@ cd leftwm
 cargo build --profile optimized --no-default-features --features=lefthk
 # this will work even without systemd
 
-sudo rm /usr/bin/leftwm
-sudo rm /usr/bin/leftwm-worker
-sudo rm /usr/bin/lefthk-worker
-sudo rm /usr/bin/leftwm-state
-sudo rm /usr/bin/leftwm-check
-sudo rm /usr/bin/leftwm-command
-sudo ln -s "$(pwd)"/target/optimized/leftwm /usr/bin/leftwm
-sudo ln -s "$(pwd)"/target/optimized/leftwm-worker /usr/bin/leftwm-worker
-sudo ln -s "$(pwd)"/target/optimized/lefthk-worker /usr/bin/lefthk-worker
-sudo ln -s "$(pwd)"/target/optimized/leftwm-state /usr/bin/leftwm-state
-sudo ln -s "$(pwd)"/target/optimized/leftwm-check /usr/bin/leftwm-check
-sudo ln -s "$(pwd)"/target/optimized/leftwm-command /usr/bin/leftwm-command
+
+
+# --- ROOT REQUIRED HERE ---
+rm /usr/bin/leftwm
+rm /usr/bin/leftwm-worker
+rm /usr/bin/lefthk-worker
+rm /usr/bin/leftwm-state
+rm /usr/bin/leftwm-check
+rm /usr/bin/leftwm-command
+ln -s "$(pwd)"/target/optimized/leftwm /usr/bin/leftwm
+ln -s "$(pwd)"/target/optimized/leftwm-worker /usr/bin/leftwm-worker
+ln -s "$(pwd)"/target/optimized/lefthk-worker /usr/bin/lefthk-worker
+ln -s "$(pwd)"/target/optimized/leftwm-state /usr/bin/leftwm-state
+ln -s "$(pwd)"/target/optimized/leftwm-check /usr/bin/leftwm-check
+ln -s "$(pwd)"/target/optimized/leftwm-command /usr/bin/leftwm-command
+# --- ROOT NO LONGER REQUIRED ---
+
 
 cd ..
 
@@ -95,12 +100,14 @@ if [$ALACRITTY_INSTALL -eq 1]; then
         tic -xe alacritty,alacritty-direct extra/alacritty.info
     fi
 
-    sudo rm /usr/local/bin/alacritty
-    sudo rm /usr/share/pixmaps/Alacritty.svg
-    sudo ln -s "$(pwd)"/target/release/alacritty /usr/local/bin/alacritty
-    sudo ln -s "$(pwd)"/extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-    sudo desktop-file-install extra/linux/Alacritty.desktop
-    sudo update-desktop-database
+    # --- ROOT REQUIRED HERE ---
+    rm /usr/local/bin/alacritty
+    rm /usr/share/pixmaps/Alacritty.svg
+    ln -s "$(pwd)"/target/release/alacritty /usr/local/bin/alacritty
+    ln -s "$(pwd)"/extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+    desktop-file-install extra/linux/Alacritty.desktop
+    update-desktop-database
+    # --- ROOT NO LONGER REQUIRED ---
 
     echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc
 
@@ -114,8 +121,10 @@ git clone https://github.com/PonasKovas/rlaunch.git
 cd rlaunch
 cargo build --release
 
-sudo rm /usr/bin/rlaunch
-sudo ln -s "$(pwd)"/target/release/rlaunch /usr/bin/rlaunch
+# --- ROOT REQUIRED HERE ---
+rm /usr/bin/rlaunch
+ln -s "$(pwd)"/target/release/rlaunch /usr/bin/rlaunch
+# --- ROOT NO LONGER REQUIRED ---
 
 cd ..
 
@@ -134,7 +143,9 @@ if [$FEH_INSTALL -eq 1]; then
     cd feh
 
     make
-    sudo make install
+    # --- ROOT REQUIRED HERE ---
+    make install
+    # --- ROOT NO LONGER REQUIRED ---
 
     cd ..
 fi
@@ -145,19 +156,23 @@ git clone https://github.com/akermu/rlock
 cd rlock
 
 cargo build --release
-sudo chown root target/release/rlock
-sudo chmod u+s target/release/rlock
-sudo ln -s "$(pwd)"/target/release/rlock /usr/local/bin/rlock
+
+# --- ROOT REQUIRED HERE ---
+chown root target/release/rlock
+chmod u+s target/release/rlock
+ln -s "$(pwd)"/target/release/rlock /usr/local/bin/rlock
+# --- ROOT NO LONGER REQUIRED ---
 
 
 
 echo "Please install polybar using the package manager of your choice. The amount of dependencies is, at this point, simply too much to handle. Polybar is available for most distros."
 
-sudo cp -r ~/dotfiles/.config/* ~/.config
-sudo ln -s ~/.config/leftwm/themes/ondrik ~/.config/leftwm/themes/current
-sudo chmod +x ~/.config/leftwm/themes/current/up
-sudo chmod +x ~/.config/leftwm/themes/current/down
-
+# --- ROOT REQUIRED HERE ---
+cp -r ~/dotfiles/.config/* ~/.config
+ln -s ~/.config/leftwm/themes/ondrik ~/.config/leftwm/themes/current
+chmod +x ~/.config/leftwm/themes/current/up
+chmod +x ~/.config/leftwm/themes/current/down
+# --- ROOT NO LONGER REQUIRED ---
 
 echo "Please also update your .xinitrc file"
 
