@@ -175,6 +175,6 @@ chmod +x ~/.config/leftwm/themes/current/down
 # --- ROOT NO LONGER REQUIRED ---
 
 echo "Please also update your .xinitrc file"
-
+echo "Please also remember to update the polybar.config with the correct battery name, network interface name, etc."
 
 
