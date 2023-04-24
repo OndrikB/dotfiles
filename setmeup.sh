@@ -40,7 +40,7 @@ else
     fi
 fi
 
-if [$EX -eq 1]; then
+if [ $EX -eq 1 ]; then
     exit 1
 fi
 
@@ -89,7 +89,7 @@ select yn in "Yes" "No"; do
     esac
 done
 
-if [$ALACRITTY_INSTALL -eq 1]; then
+if [ $ALACRITTY_INSTALL -eq 1 ]; then
     git clone https://github.com/alacritty/alacritty
     cd alacritty
     cargo build --release --no-default-features --features=x11
@@ -137,7 +137,7 @@ select yn in "Yes" "No"; do
     esac
 done
 
-if [$FEH_INSTALL -eq 1]; then
+if [ $FEH_INSTALL -eq 1 ]; then
 
     git clone https://github.com/derf/feh
     cd feh
