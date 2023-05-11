@@ -16,8 +16,10 @@ Linux config files (currently lots of example configs, will customize at some po
 
 ## Setup
 
-for setup, clone this, copy `setmeup.sh` into the home directory and run it
+for setup, clone this, copy `setmeup.sh` into the home directory and run it.
+
 This is all expected to be done from your user's home directory, and will create a `desktop_env` folder inside. 
+
 DO NOT delete this folder as it contains the binaries which are symlinked to your `/usr/bin` (more on this in the Information section)
 
 ## Information
