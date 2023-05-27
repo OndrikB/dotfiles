@@ -9,4 +9,4 @@ vim.opt.smartindent = true
 vim.cmd.set("relativenumber")
 vim.cmd.set("termguicolors")
 -- TODO: change color scheme sometimes!
-vim.cmd.colorscheme("falcon")
+vim.cmd.colorscheme("ayu-dark")
