@@ -21,10 +21,24 @@ fi
 leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 
 #set background to a random one
-
-if [ -x "$(command -v feh)" ]; then
-	feh --bg-scale `ls $SCRIPTPATH/*.png | shuf -n 1`
+#WARNING! Images MUST Have 8-bit colors otherwise wal will all be f*cked up!
+if [ ! f $SCRIPTPATH/last_bg.txt ]
+then
+  RFILE=$(ls $SCRIPTPATH/backgrounds/* | shuf -n 1)
+else
+  ALR=$(cat $SCRIPTPATH/last_bg.txt)
+  RFILE=$(ls $SCRIPTPATH/backgrounds/* | shuf -n 1)
+  while [[ $RFILE == $ALR ]]; do
+    RFILE=$(ls $SCRIPTPATH/backgrounds/* | shuf -n 1)
+  done
 fi
+echo $RFILE > $SCRIPTPATH/last_bg.txt
+if [ -x "$(command -v wal)" ]; then
+  wal -i $RFILE
+elif [ -x "$(command -v feh)" ]; then
+  feh --bg-scale $RFILE
+fi
+
 
 
 index=0
