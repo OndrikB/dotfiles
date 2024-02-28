@@ -51,4 +51,38 @@ require('mason-lspconfig').setup_handlers({
       capabilities = lsp_capabilities,
     })
   end,
+
+  ["rust_analyzer"] = function ()
+    lspconfig.rust_analyzer.setup({
+      on_attach = lsp_attach,
+      capabilities = lsp_capabilities,
+      settings = {
+        ["rust-analyzer"] = {
+          diagnostics = {
+            enable = false;
+          },
+          check = {
+            command = "clippy";
+            extraArgs = {"--",
+              "-Dclippy::all", -- this is kinda eh
+              "-Wclippy::pedantic",
+              "-Dclippy::restriction", -- literally not a particularly good idea
+              "-Wclippy::nursery",
+              "-Aclippy::self-named-module-files", "-Aclippy::mod-module-files",
+              "-Aclippy::implicit-return", -- please pick one, clippy
+              "-Aclippy::missing-docs-in-private-items", -- annoying
+              "-Aclippy::print-stdout", -- I like println
+              "-Aclippy::print-stderr", -- and eprintln
+              "-Aclippy::question-mark-used", -- why, seriously
+              "-Aclippy::float-arithmetic", -- I am not doing kernel dev for now
+              "-Wclippy::wildcard-enum-match-arm", -- can be good, not as deny
+              "-Aclippy::too-many-lines", -- please don't mark everything thanks
+              "-Aclippy::single-call-fn", -- literally says "it's usually not bad"
+            };
+            features = "all";
+          },
+        },
+      },
+    })
+  end
 })

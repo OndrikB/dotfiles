@@ -1,6 +1,6 @@
 return {
   {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }
-  }
+  dependencies = { "rafamadriz/friendly-snippets", 'kyazdani42/nvim-web-devicons', lazy = true }
+  },
 }

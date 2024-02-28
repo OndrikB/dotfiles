@@ -15,16 +15,7 @@ vim.g.mapleader = " "
 
 require("lazy").setup("plugins")
 
-
 -- thank you theprimeagen for this idea
 -- EVERYTHING I SET UP MYSELF MUST GO IN THIS FOLDER
 require("ondrik")
-
-
-
-
-
-
-
-
 
